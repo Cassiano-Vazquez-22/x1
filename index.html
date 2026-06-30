@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drop Pronto! 🪂🔫</title>
+    <title>X1 noob 🪂🔫</title>
     <style>
         * {
             box-sizing: border-box;
@@ -11,9 +11,7 @@
             padding: 0;
         }
         body {
-            /* Fonte robusta bem estilo jogo de tiro militar */
             font-family: 'Impact', 'Arial Black', sans-serif;
-            /* Fundo escuro texturizado com gradiente */
             background: linear-gradient(135deg, #0d0e11, #1f2229);
             color: #ffffff;
             height: 100vh;
@@ -26,10 +24,9 @@
         .container {
             background: rgba(18, 20, 26, 0.95);
             padding: 35px;
-            border-radius: 4px; /* Bordas mais retas estilo caixas militar */
-            /* Sombra laranja neon lembrando a fumaça do Air Drop */
+            border-radius: 4px;
             box-shadow: 0 0 30px rgba(245, 124, 0, 0.3);
-            border: 3px solid #f57c00; /* Laranja clássico do PUBG */
+            border: 3px solid #f57c00;
             max-width: 420px;
             width: 90%;
             z-index: 10;
@@ -55,9 +52,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
             position: relative;
-            min-height: 130px;
+            min-height: 140px; /* Garante o espaço reservado para o botão fixo */
         }
         button {
             padding: 14px 28px;
@@ -65,7 +61,7 @@
             text-transform: uppercase;
             font-weight: bold;
             border: none;
-            border-radius: 4px; /* Botão quadrado/militar */
+            border-radius: 4px;
             cursor: pointer;
             letter-spacing: 1px;
         }
@@ -87,57 +83,51 @@
             background-color: #2b303c;
             color: #717b91;
             border: 1px solid #41495a;
-            transition: left 0.2s ease, top 0.2s ease; 
+            /* Transição suave de movimento */
+            transition: left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), top 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
             z-index: 999;
             width: 100%;
             max-width: 250px;
+            position: fixed; /* Já inicia como fixo para habilitar a animação */
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>WINNER WINNER CHICKEN DINNER? 🪂</h1>
-        <p>O squad tá chamando. Bora dropar em Pochinki hoje e buscar esse top 1?</p>
+        <h1>X1 ? 🪂</h1>
+        <p>Tá com medo?</p>
         
         <div class="btn-container">
-            <button id="btn-sim" onclick="confirmarTreino()">BORA PRO COLO, SQUAD! 🔥</button>
-            <button id="btn-nao" onmouseover="fugir()" onclick="fugir()" ontouchstart="fugir()">VOU PIPOCAR EM CASA 💤</button>
+            <button id="btn-sim" onclick="confirmarTreino()"> Estou com medo</button>
+            <button id="btn-nao" onmouseover="fugir()" onclick="fugir()" ontouchstart="fugir()">Bora, vou te amassar</button>
         </div>
     </div>
 
     <script>
+        // Função para posicionar o botão NÃO logo abaixo do SIM assim que a página carrega
+        function posicionarBotaoInicial() {
+            const botaoSim = document.getElementById('btn-sim');
+            const botaoNao = document.getElementById('btn-nao');
+            const rectSim = botaoSim.getBoundingClientRect();
+            
+            // Centraliza horizontalmente com o botão sim e joga 70px para baixo
+            botaoNao.style.left = (rectSim.left + (botaoSim.offsetWidth / 2) - (botaoNao.offsetWidth / 2)) + 'px';
+            botaoNao.style.top = (rectSim.top + 70) + 'px';
+        }
+
+        // Executa o posicionamento inicial assim que a tela carrega e se mudar o tamanho da janela
+        window.addEventListener('DOMContentLoaded', posicionarBotaoInicial);
+        window.addEventListener('resize', posicionarBotaoInicial);
+
         function fugir() {
             const botaoNao = document.getElementById('btn-nao');
             const botaoSim = document.getElementById('btn-sim');
-            
             const rectSim = botaoSim.getBoundingClientRect();
             
-            const margem = 50;
+            const margem = 60;
             const larguraJanela = window.innerWidth - botaoNao.offsetWidth - margem;
             const alturaJanela = window.innerHeight - botaoNao.offsetHeight - margem;
             
             let novoX, novoY;
             let muitoPerto = true;
-
-            while (muitoPerto) {
-                novoX = Math.random() * (larguraJanela - margem) + margem;
-                novoY = Math.random() * (alturaJanela - margem) + margem;
-
-                const distanciaX = Math.abs(novoX - rectSim.left);
-                const distanciaY = Math.abs(novoY - rectSim.top);
-
-                if (distanciaX > 150 || distanciaY > 150) {
-                    muitoPerto = false;
-                }
-            }
-            
-            botaoNao.style.position = 'fixed';
-            botaoNao.style.left = novoX + 'px';
-            botaoNao.style.top = novoY + 'px';
-        }
-
-        function confirmarTreino() {
-            // Mudei o texto do whats para combinar com o jogo!
-            const mensagem = encodeURIComponent("Tô colando no lobby! Separa o colete 3 e a M416 que hoje é só capa! 🔫🪂");
-            window.location.href = `
